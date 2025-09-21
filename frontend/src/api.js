@@ -1,12 +1,25 @@
-import axios from "axios";
+let mockContacts = [
+  { id: 1, name: "Ritesh Soni", email: "ritesh@example.com", phone: "9876543210" },
+  { id: 2, name: "Anjali Sharma", email: "anjali@example.com", phone: "9123456780" },
+  { id: 3, name: "Rahul Verma", email: "rahul@example.com", phone: "9988776655" },
+  { id: 4, name: "Sana Khan", email: "sana@example.com", phone: "9001122334" },
+  { id: 5, name: "Vikram Joshi", email: "vikram@example.com", phone: "9112233445" },
+];
 
-const API = axios.create({
-  baseURL: "https://contact-book-app-4vmv.onrender.com", // backend URL
-});
+export async function fetchContacts(page = 1, limit = 3) {
+  const start = (page - 1) * limit;
+  const pagedContacts = mockContacts.slice(start, start + limit);
+  const totalPages = Math.ceil(mockContacts.length / limit);
+  return { data: { contacts: pagedContacts, totalPages } };
+}
 
-export const fetchContacts = (page = 1) =>
-  API.get(`/contacts?page=${page}&limit=5`);
+export async function addContact(contact) {
+  const newId = mockContacts.length ? Math.max(...mockContacts.map(c => c.id)) + 1 : 1;
+  mockContacts.push({ id: newId, ...contact });
+  return { success: true };
+}
 
-export const addContact = (contact) => API.post("/contacts", contact);
-
-export const deleteContact = (id) => API.delete(`/contacts/${id}`);
+export async function deleteContact(id) {
+  mockContacts = mockContacts.filter(c => c.id !== id);
+  return { success: true };
+}

@@ -6,18 +6,24 @@ import Pagination from "./components/Pagination";
 import "./App.css";
 
 function App() {
-  const [contacts, setContacts] = useState([
-  { id: 1, name: "Ritesh Soni", phone: "9876543210", email: "ritesh@example.com" },
-  { id: 2, name: "Anjali Sharma", phone: "9123456780", email: "anjali@example.com" },
-  { id: 3, name: "Rahul Verma", phone: "9988776655", email: "rahul@example.com" }
-  ]);
+  const [contacts, setContacts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const loadContacts = async () => {
-    const res = await fetchContacts(page);
-    setContacts(res.data.contacts);
-    setTotalPages(res.data.totalPages);
+    try {
+      setLoading(true);
+      const res = await fetchContacts(page);
+      const data = res.data || res; // adjust to API response
+      setContacts(data.contacts || []);
+      setTotalPages(data.totalPages || 1);
+    } catch (err) {
+      console.error("Failed to load contacts:", err);
+      setContacts([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -28,7 +34,7 @@ function App() {
     <div className="app">
       <h1>📒 Contact Book</h1>
       <ContactForm onAdded={loadContacts} />
-      <ContactList contacts={contacts} onDeleted={loadContacts} />
+      <ContactList contacts={contacts} onDeleted={loadContacts} loading={loading} />
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );

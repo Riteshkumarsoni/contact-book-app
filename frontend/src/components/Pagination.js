@@ -1,19 +1,13 @@
 export default function Pagination({ page, totalPages, onPageChange }) {
   return (
     <div className="pagination">
-      <button
-        onClick={() => onPageChange(page - 1)}
-        disabled={page === 1}
-      >
-        Prev
+      <button disabled={page <= 1} onClick={() => onPageChange(page - 1)}>
+        Previous
       </button>
       <span>
         Page {page} of {totalPages}
       </span>
-      <button
-        onClick={() => onPageChange(page + 1)}
-        disabled={page === totalPages}
-      >
+      <button disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>
         Next
       </button>
     </div>

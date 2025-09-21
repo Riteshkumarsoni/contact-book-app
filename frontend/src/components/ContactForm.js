@@ -17,7 +17,7 @@ export default function ContactForm({ onAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form className="contact-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Name"
@@ -31,7 +31,7 @@ export default function ContactForm({ onAdded }) {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type="text"
+        type="tel"
         placeholder="Phone"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
