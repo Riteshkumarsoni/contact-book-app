@@ -6,7 +6,11 @@ import Pagination from "./components/Pagination";
 import "./App.css";
 
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([
+  { id: 1, name: "Ritesh Soni", phone: "9876543210", email: "ritesh@example.com" },
+  { id: 2, name: "Anjali Sharma", phone: "9123456780", email: "anjali@example.com" },
+  { id: 3, name: "Rahul Verma", phone: "9988776655", email: "rahul@example.com" }
+  ]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
