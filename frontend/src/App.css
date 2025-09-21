@@ -1,0 +1,40 @@
+.app {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form input {
+  flex: 1;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+ 
