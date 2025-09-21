@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000", // backend URL
+  baseURL: "https://contact-book-app-4vmv.onrender.com", // backend URL
 });
 
 export const fetchContacts = (page = 1) =>
